@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversion Result</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if success %}
+            <p>Your PDF has been successfully converted!</p>
+            <p>
+                <a href="{{ url_for('serve_html_file', session_id=session_id, filename=html_filename) }}" target="_blank" class="button">View HTML</a>
+                <a href="{{ url_for('download_html_file', session_id=session_id, filename=html_filename) }}" class="button">Download HTML</a>
+            </p>
+            {% if images_folder_exists %}
+            <p>Images have been extracted to a subfolder within the output directory.</p>
+            {% endif %}
+        {% else %}
+            <p>There was an error during the conversion process. Please check the server logs for more details.</p>
+        {% endif %}
+        <p><a href="{{ url_for('index') }}">Convert another PDF</a></p>
+    </div>
+</body>
+</html>
