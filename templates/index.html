@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to HTML Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>PDF to Multi-Language HTML Converter</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('process_pdf') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="pdf_file">Upload PDF File:</label>
+                <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required>
+            </div>
+
+            <div class="form-group">
+                <label>Select Target Language(s):</label>
+                <p><small>The first selected language will be the primary language for alt text and the HTML 'lang' attribute.</small></p>
+                {% for key, name in supported_languages.items() %}
+                <div class="checkbox-group">
+                    <input type="checkbox" name="target_languages" value="{{ key }}" id="lang_{{ loop.index }}">
+                    <label for="lang_{{ loop.index }}">{{ name }}</label>
+                </div>
+                {% endfor %}
+                 <p id="lang_error" style="color:red; display:none;">Please select at least one language.</p>
+            </div>
+
+            <button type="submit" class="submit-button">Convert to HTML</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const checkboxes = document.querySelectorAll('input[name="target_languages"]:checked');
+            if (checkboxes.length === 0) {
+                document.getElementById('lang_error').style.display = 'block';
+                event.preventDefault(); // Stop form submission
+            } else {
+                 document.getElementById('lang_error').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
