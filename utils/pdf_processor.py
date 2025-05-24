@@ -359,9 +359,25 @@ def finalize_html(html_content, head_content_template, target_languages):
 SUPPORTED_LANGUAGES = {
     "English": "English",
     "Hindi": "Hindi",
-    "Spanish": "Spanish",
-    "French": "French",
-    "German": "German",
-    "Japanese": "Japanese",
-    "Chinese (Simplified)": "Chinese (Simplified)"
+    "Marathi": "Marathi",
+    "Bengali": "Bengali",
+    "Telugu": "Telugu",
+    "Tamil": "Tamil",
+    "Gujarati": "Gujarati",
+    "Urdu": "Urdu",
+    "Kannada": "Kannada",
+    "Odia": "Odia",
+    "Malayalam": "Malayalam",
+    "Punjabi": "Punjabi",
+    "Assamese": "Assamese",
+    "Maithili": "Maithili",
+    "Santali": "Santali",
+    "Konkani": "Konkani",
+    "Kashmiri": "Kashmiri",
+    "Dogri": "Dogri",
+    "Manipuri": "Manipuri",
+    "Bodo": "Bodo",
+    "Sindhi": "Sindhi",
+    "Sanskrit": "Sanskrit"
 }
+
