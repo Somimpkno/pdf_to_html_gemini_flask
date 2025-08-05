@@ -25,7 +25,7 @@ def get_gemini_client_and_models():
         print(f"Could not initialize vision model '{vision_model_name}'. Vision features might be limited. Error: {e_vis}")
 
     try:
-        text_model_name = "gemini-2.5-flash-preview-05-20" # Using a more robust model for generation.
+        text_model_name = "gemini-2.5-flash" # Using a more robust model for generation.
                                                   # 'gemini-2.5-flash-preview-05-20' is specific.
                                                   # 'gemini-1.5-pro-latest' is a good general choice.
         text_model = genai.GenerativeModel(model_name=text_model_name)
